@@ -9,6 +9,7 @@ on:
 
 jobs:
   test:
+    name: 'Run test: node-16, ubuntu-latest'
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
