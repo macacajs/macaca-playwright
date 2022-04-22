@@ -4,15 +4,15 @@
 
 [![NPM version][npm-image]][npm-url]
 [![CI][ci-image]][ci-url]
-[![Test coverage][coveralls-image]][coveralls-url]
+[![Test coverage][codecov-image]][codecov-url]
 [![node version][node-image]][node-url]
 
 [npm-image]: https://img.shields.io/npm/v/macaca-playwright.svg
 [npm-url]: https://npmjs.org/package/macaca-playwright
 [ci-image]: https://github.com/macacajs/macaca-playwright/actions/workflows/ci.yml/badge.svg
 [ci-url]: https://github.com/macacajs/macaca-playwright/actions/workflows/ci.yml
-[coveralls-image]: https://img.shields.io/coveralls/macacajs/macaca-playwright.svg
-[coveralls-url]: https://coveralls.io/r/macacajs/macaca-playwright?branch=master
+[codecov-image]: https://img.shields.io/codecov/c/github/macacajs/macaca-playwright.svg?logo=codecov
+[codecov-url]: https://codecov.io/gh/macacajs/macaca-playwright
 [node-image]: https://img.shields.io/badge/node.js-%3E=_16-green.svg
 [node-url]: http://nodejs.org/download/
 
