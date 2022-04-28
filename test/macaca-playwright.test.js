@@ -24,6 +24,9 @@ describe('unit testing', function() {
       await driver.startDevice({
         headless: true,
         userAgent: customUserAgent,
+        recordVideo: {
+          dir: path.resolve(__dirname, '..', 'videos'),
+        },
       });
     });
 

@@ -1,5 +1,6 @@
 node_modules
-coverage/
-.nyc_output/
+coverage
+videos
+.nyc_output
 *.sw*
 *.un~
