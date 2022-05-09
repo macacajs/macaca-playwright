@@ -7,13 +7,7 @@ const _ = require('../lib/helper');
 const Playwright = require('../lib/macaca-playwright');
 
 describe('unit testing', function() {
-  this.timeout(5 * 60 * 1000);
-
-  describe('base', function() {
-    it('should be ok', function() {
-      assert(Playwright);
-    });
-  });
+  this.timeout(5 * 60E3);
 
   describe('methods testing', function() {
 
@@ -21,11 +15,12 @@ describe('unit testing', function() {
     const customUserAgent = 'custom userAgent';
 
     before(async () => {
+      const videoDir = path.resolve(__dirname, '..', 'videos');
       await driver.startDevice({
         headless: true,
         userAgent: customUserAgent,
         recordVideo: {
-          dir: path.resolve(__dirname, '..', 'videos'),
+          dir: videoDir,
         },
       });
     });
@@ -119,6 +114,5 @@ describe('unit testing', function() {
     after(async () => {
       await driver.stopDevice();
     });
-
   });
 });
