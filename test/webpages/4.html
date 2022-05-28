@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document 4</title>
+  </head>
+  <body>
+    <input id="input"/>
+    <div id="target"></div>
+    <div id="target_click"></div>
+    <button id="btn">btn</button>
+    <script>
+      (async ()=>{
+        input.focus();
+        await __execCommand('keyboard', 'insertText', 'macaca').then(()=>{
+          target.innerHTML = input.value;
+        });
+        let result = '';
+        btn.onmousemove = ()=>{
+          result += 'mousemove';
+        };
+        btn.onmousedown = ()=>{
+          result += 'mousedown';
+        };
+        const {x, y} = btn.getBoundingClientRect();
+        await __execCommand('mouse', 'move', x + 1, y + 1);
+        await __execCommand('mouse', 'down');
+        target_click.innerHTML = result;
+      })();
+    </script>
+  </body>
+</html>
