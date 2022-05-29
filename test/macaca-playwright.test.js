@@ -117,63 +117,6 @@ describe('unit testing', function() {
     });
   });
 
-  describe('__execCommand test', function() {
-    const driver = new Playwright();
-
-    before(async () => {
-      const videoDir = path.resolve(__dirname, '..', 'videos');
-      await driver.startDevice({
-        headless: true,
-        uitest: true,
-        userAgent: customUserAgent,
-        recordVideo: {
-          dir: videoDir,
-        },
-      });
-    });
-
-    it('test __execCommand unknonw command', async () => {
-      const result = await driver.execute('__execCommand("keyboard1", "press", "KeyA")');
-      assert.equal(result, null);
-    });
-
-    it('test __execCommand invalid command', async () => {
-      const result = await driver.execute('__execCommand(null, "press", "KeyA")');
-      assert.equal(result, null);
-    });
-
-    it('test commands keyboard should work', async () => {
-      await driver.get('file://' + path.resolve(__dirname, 'webpages/4.html'));
-      await _.sleep(1000);
-      const box = await driver.findElement('id', 'target');
-      const boxText = await driver.getText(box.ELEMENT);
-      assert.equal(boxText, 'macaca');
-      const boxClick = await driver.findElement('id', 'target_click');
-      const clickText = await driver.getText(boxClick.ELEMENT);
-      assert.equal(clickText, 'mousemovemousedown');
-    });
-
-    after(async () => {
-      await driver.stopDevice();
-    });
-  });
-
-  describe('waitForEvent test', function() {
-    it('waitForEvent should work', async () => {
-      const driver = new Playwright();
-      await driver.startDevice({
-        uitest: true,
-        headless: true,
-        userAgent: customUserAgent,
-      });
-      setTimeout(() => {
-        driver.stopDevice();
-      }, 0);
-      await driver.waitForEvent('close');
-      assert(true);
-    });
-  });
-
   describe('console redirect', function() {
   
     it('console test', async () => {
