@@ -9,8 +9,8 @@ if (process.argv[2] === 'child') {
       headless: true,
       redirectConsole: true,
     });
-    if (process.argv[3] === 'load5') {
-      await driver.get('file://' + path.resolve(__dirname, '../webpages/5.html'));
+    if (process.argv[3] === 'load4') {
+      await driver.get('file://' + path.resolve(__dirname, '../webpages/4.html'));
     } else {
       await driver.execute(`console.${process.argv[3]}('${process.argv[4]}')`);
     }

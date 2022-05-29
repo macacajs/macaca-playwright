@@ -128,7 +128,7 @@ describe('unit testing', function() {
     });
 
     it('console at page throws an error or a warning', async () => {
-      const data = await consoleProcess('load5');
+      const data = await consoleProcess('load4');
       assert(data.startsWith('Fetch API cannot load'));
     });
   });
