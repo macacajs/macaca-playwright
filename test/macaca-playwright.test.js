@@ -158,8 +158,8 @@ describe('unit testing', function() {
     });
   });
 
-  describe('waitForClose test', function() {
-    it('waitForClose should work', async () => {
+  describe('waitForEvent test', function() {
+    it('waitForEvent should work', async () => {
       const driver = new Playwright();
       await driver.startDevice({
         uitest: true,
@@ -169,7 +169,7 @@ describe('unit testing', function() {
       setTimeout(() => {
         driver.stopDevice();
       }, 0);
-      await driver.waitForClose();
+      await driver.waitForEvent('close');
       assert(true);
     });
   });
