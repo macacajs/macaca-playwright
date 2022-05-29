@@ -7,7 +7,7 @@ if (process.argv[2] === 'child') {
   (async () => {
     await driver.startDevice({
       headless: true,
-      uitest: true,
+      redirectConsole: true,
     });
     if (process.argv[3] === 'load5') {
       await driver.get('file://' + path.resolve(__dirname, '../webpages/5.html'));
