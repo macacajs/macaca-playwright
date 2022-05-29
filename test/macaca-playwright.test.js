@@ -5,14 +5,15 @@ const assert = require('power-assert');
 
 const _ = require('../lib/helper');
 const Playwright = require('../lib/macaca-playwright');
+const consoleProcess = require('./scripts/consoleProcess');
 
 describe('unit testing', function() {
   this.timeout(5 * 60E3);
+  const customUserAgent = 'custom userAgent';
 
   describe('methods testing', function() {
 
     const driver = new Playwright();
-    const customUserAgent = 'custom userAgent';
 
     before(async () => {
       const videoDir = path.resolve(__dirname, '..', 'videos');
@@ -113,6 +114,22 @@ describe('unit testing', function() {
 
     after(async () => {
       await driver.stopDevice();
+    });
+  });
+
+  describe('console redirect', function() {
+  
+    it('console test', async () => {
+      const types = [ 'log', 'warn', 'error', 'info' ];
+      for (const type of types) {
+        const data = await consoleProcess(type, 'macaca');
+        assert.equal(data, 'macaca');
+      }
+    });
+
+    it('console at page throws an error or a warning', async () => {
+      const data = await consoleProcess('load4');
+      assert(data.startsWith('Fetch API cannot load'));
     });
   });
 });

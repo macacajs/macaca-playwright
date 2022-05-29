@@ -1,6 +1,6 @@
 {
   "name": "macaca-playwright",
-  "version": "1.1.5",
+  "version": "1.2.1",
   "description": "Macaca Playwright driver",
   "keywords": [
     "playwright",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "driver-base": "^0.1.4",
+    "kleur": "^4.1.4",
     "lodash": "^4.17.21",
     "mkdirp": "^1.0.4",
     "playwright": "^1.21.0",
