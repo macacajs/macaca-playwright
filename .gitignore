@@ -4,3 +4,4 @@ videos
 .nyc_output
 *.sw*
 *.un~
+.idea
