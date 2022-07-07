@@ -10,7 +10,8 @@ if (process.argv[2] === 'child') {
       redirectConsole: true,
     });
     if (process.argv[3] === 'load4') {
-      await driver.get('file://' + path.resolve(__dirname, '../webpages/4.html'));
+      const url = 'file://' + path.resolve(__dirname, '../webpages/4.html');
+      await driver.get(url);
     } else {
       await driver.execute(`console.${process.argv[3]}('${process.argv[4]}')`);
     }
