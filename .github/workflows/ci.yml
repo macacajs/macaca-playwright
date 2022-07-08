@@ -11,7 +11,7 @@ jobs:
   test:
     name: 'Run test: playwright docker'
     timeout-minutes: 60
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container: mcr.microsoft.com/playwright:focal
     steps:
       - name: Checkout
@@ -19,15 +19,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set node version to 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-
       - name: Install deps
         run: |
-          npm i cnpm -g
-          cnpm i
+          npm i
 
       - name: Run lint
         run: npm run lint
