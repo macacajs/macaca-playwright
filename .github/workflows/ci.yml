@@ -9,9 +9,12 @@ on:
 
 jobs:
   test:
-    name: 'Run test: node-16, ubuntu-latest'
-    timeout-minutes: 10
+    name: 'Run test: playwright docker'
+    timeout-minutes: 60
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:focal
+    env:
+      HEADLESS: true
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,8 +28,8 @@ jobs:
 
       - name: Install deps
         run: |
-          npm i cnpm -g
-          cnpm i
+          npm i npm@6 -g
+          npm i
 
       - name: Run lint
         run: npm run lint
