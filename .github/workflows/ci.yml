@@ -27,7 +27,7 @@ jobs:
           node-version: "16"
 
       - name: Install deps
-        run: npm i
+        run: npm i npm@6 -g
 
       - name: Run lint
         run: npm run lint
