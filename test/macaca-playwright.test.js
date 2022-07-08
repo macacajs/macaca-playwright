@@ -132,7 +132,7 @@ describe('unit testing', function() {
     });
   });
 
-  describe('methods testing with firefox', function() {
+  describe.skip('methods testing with firefox', function() {
 
     const driver = new Playwright();
 
