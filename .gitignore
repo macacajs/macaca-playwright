@@ -5,3 +5,4 @@ videos
 *.sw*
 *.un~
 .idea
+dist

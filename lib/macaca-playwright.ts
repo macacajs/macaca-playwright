@@ -1,25 +1,28 @@
-'use strict';
 
-const path = require('path');
-const { sync: mkdirp } = require('mkdirp');
-const playwright = require('playwright');
-const DriverBase = require('driver-base');
 
-const _ = require('./helper');
-const controllers = require('./controllers');
-const initRedirectConsole = require('./redirect-console');
+import path from 'path';
+import { sync as mkdirp } from 'mkdirp';
+import playwright from 'playwright';
+import DriverBase from 'driver-base';
+
+import _ from './helper';
+import initRedirectConsole from './redirect-console';
+import controllers from './controllers';
+
+type TContextOptions = {
+  ignoreHTTPSErrors: boolean,
+  locale: string,
+  userAgent?: string,
+  recordVideo?: string,
+};
 
 class Playwright extends DriverBase {
-
-  constructor() {
-    super();
-    this.args = null;
-    this.browser = null;
-    this.browserContext = null;
-    this.frame = null;
-    this.page = null;
-    this.atoms = [];
-  }
+  args = null;
+  browser = null;
+  browserContext = null;
+  frame = null;
+  page = null;
+  atoms = [];
 
   async startDevice(caps = {}) {
     this.args = _.clone(caps);
@@ -33,7 +36,7 @@ class Playwright extends DriverBase {
     delete launchOptions.port;
     const browserName = this.args.browserName || 'chromium';
     this.browser = await playwright[browserName].launch(launchOptions);
-    const newContextOptions = {
+    const newContextOptions: TContextOptions = {
       locale: this.args.locale,
       ignoreHTTPSErrors: true,
     };
