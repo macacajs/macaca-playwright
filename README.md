@@ -33,7 +33,7 @@ This project follows the git-contributor [spec](https://github.com/xudafeng/git-
 ## Installment
 
 ```bash
-$ npm i macaca-playwright -g
+$ npm i macaca-playwright --save-dev
 ```
 
 ## Usage as module

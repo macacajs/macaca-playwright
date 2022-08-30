@@ -1,5 +1,3 @@
-
-
 import path from 'path';
 import { sync as mkdirp } from 'mkdirp';
 import playwright from 'playwright';
