@@ -6,7 +6,10 @@ const assert = require('power-assert');
 const _ = require('../lib/helper');
 const Playwright = require('../lib/macaca-playwright');
 
+const headless = !!process.env.CI;
+
 describe('unit testing', function() {
+  let res;
   this.timeout(5 * 60E3);
   const customUserAgent = 'custom userAgent';
 
@@ -17,7 +20,7 @@ describe('unit testing', function() {
     before(async () => {
       const videoDir = path.resolve(__dirname, '..', 'videos');
       await driver.startDevice({
-        headless: true,
+        headless,
         userAgent: customUserAgent,
         recordVideo: {
           dir: videoDir,
@@ -109,6 +112,12 @@ describe('unit testing', function() {
       assert.equal(windows.length, 1);
       const title = await driver.title();
       assert.equal(title, 'Document 1');
+    });
+
+    it('getAllCookies', async () => {
+      await driver.get('https://www.baidu.com');
+      res = await driver.getAllCookies();
+      assert(Array.isArray(res));
     });
 
     after(async () => {
