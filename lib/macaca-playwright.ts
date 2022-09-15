@@ -6,6 +6,7 @@ import DriverBase from 'driver-base';
 import _ from './helper';
 import initRedirectConsole from './redirect-console';
 import controllers from './controllers';
+import extraActions from './extra-actions';
 
 type TContextOptions = {
   ignoreHTTPSErrors: boolean,
@@ -78,5 +79,6 @@ class Playwright extends DriverBase {
 }
 
 _.extend(Playwright.prototype, controllers);
+_.extend(Playwright.prototype, extraActions);
 
 module.exports = Playwright;
