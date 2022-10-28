@@ -22,6 +22,7 @@ class Playwright extends DriverBase {
   frame = null;
   page = null;
   atoms = [];
+  pages = [];
   browserContexts = [];
   currentContextIndex = 0;
 
@@ -63,9 +64,10 @@ class Playwright extends DriverBase {
   }
 
   async createContext(contextOptions) {
-    this.currentContextIndex++;
-    const browserContexts = await this.browser.newContext(contextOptions);
-    this.page = await browserContexts[this.currentContextIndex].newPage();
+    this.browserContexts.push(await this.browser.newContext(contextOptions));
+    const currentContext = this.browserContexts[this.currentContextIndex];
+    this.pages.push(await currentContext.newPage());
+    this.page = this.pages[this.currentContextIndex];
   }
 
   async stopDevice() {
