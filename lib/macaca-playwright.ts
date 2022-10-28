@@ -65,8 +65,8 @@ class Playwright extends DriverBase {
 
   async createContext(contextOptions) {
     this.browserContexts.push(await this.browser.newContext(contextOptions));
-    const currentContext = this.browserContexts[this.currentContextIndex];
-    this.pages.push(await currentContext.newPage());
+    this.browserContext = this.browserContexts[this.currentContextIndex];
+    this.pages.push(await this.browserContext.newPage());
     this.page = this.pages[this.currentContextIndex];
   }
 
