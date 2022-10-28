@@ -29,6 +29,8 @@ class Playwright extends DriverBase {
   browserContexts = [];
   currentContextIndex = 0;
 
+  static DEFAULT_CONTEXT = DEFAULT_CONTEXT;
+
   async startDevice(caps = {}) {
     this.args = _.clone(caps);
 
