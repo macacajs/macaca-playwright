@@ -57,6 +57,7 @@ class Playwright extends DriverBase {
       });
     }
 
+    this.newContextOptions = newContextOptions;
     await this._createContext();
 
     if (this.args.redirectConsole) {
@@ -73,7 +74,7 @@ class Playwright extends DriverBase {
     this.browserContext = this.browserContexts[this.currentContextIndex];
     this.pages.push(await this.browserContext.newPage());
     this.page = this.pages[this.currentContextIndex];
-    this.currentContextIndex = this.browserContexts.length - 1;
+    this.currentContextIndex = this.browserContext.index;
   }
 
   async stopDevice() {
