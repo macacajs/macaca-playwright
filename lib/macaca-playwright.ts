@@ -68,10 +68,12 @@ class Playwright extends DriverBase {
     const newContextOptions = Object.assign({}, contextOptions, this.newContextOptions);
     const browserContext = await this.browser.newContext(newContextOptions);
     browserContext.name = name;
+    browserContext.index = this.browserContexts.length;
     this.browserContexts.push(browserContext);
     this.browserContext = this.browserContexts[this.currentContextIndex];
     this.pages.push(await this.browserContext.newPage());
     this.page = this.pages[this.currentContextIndex];
+    this.currentContextIndex = this.browserContexts.length - 1;
   }
 
   async stopDevice() {
