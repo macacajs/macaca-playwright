@@ -8,6 +8,8 @@ import initRedirectConsole from './redirect-console';
 import controllers from './controllers';
 import extraActions from './extra-actions';
 
+const DEFAULT_CONTEXT = 'DEFAULT_CONTEXT';
+
 type TContextOptions = {
   ignoreHTTPSErrors: boolean,
   locale: string,
@@ -65,7 +67,7 @@ class Playwright extends DriverBase {
     }
   }
 
-  async _createContext(name = 'DEFAULT_CONTEXT', contextOptions = {}) {
+  async _createContext(name = DEFAULT_CONTEXT, contextOptions = {}) {
     const index = this.browserContexts.length;
     const newContextOptions = Object.assign({}, contextOptions, this.newContextOptions);
     const browserContext = await this.browser.newContext(newContextOptions);
