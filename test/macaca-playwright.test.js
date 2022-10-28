@@ -118,6 +118,25 @@ describe('unit testing', function() {
       assert(Array.isArray(res));
     });
 
+    describe('context', () => {
+      it('should be ok', async () => {
+        await driver.get('https://www.baidu.com');
+        res = await driver.getContexts();
+        assert.equal(res.length, 1);
+        await driver.setContext('foo');
+        res = await driver.getContexts();
+        assert.equal(res.length, 2);
+        assert.equal(driver.currentContextIndex, 1);
+        await driver.setContext('bar');
+        assert.equal(res.length, 3);
+        assert.equal(driver.currentContextIndex, 2);
+        await driver.setContext('foo');
+        assert.equal(res.length, 3);
+        assert.equal(driver.currentContextIndex, 1);
+        await driver.get('https://www.baidu.com');
+      });
+    });
+
     after(async () => {
       await driver.stopDevice();
     });

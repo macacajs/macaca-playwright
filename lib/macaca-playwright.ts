@@ -8,6 +8,8 @@ import initRedirectConsole from './redirect-console';
 import controllers from './controllers';
 import extraActions from './extra-actions';
 
+const DEFAULT_CONTEXT = 'DEFAULT_CONTEXT';
+
 type TContextOptions = {
   ignoreHTTPSErrors: boolean,
   locale: string,
@@ -19,9 +21,15 @@ class Playwright extends DriverBase {
   args = null;
   browser = null;
   browserContext = null;
+  newContextOptions = {};
   frame = null;
   page = null;
   atoms = [];
+  pages = [];
+  browserContexts = [];
+  currentContextIndex = 0;
+
+  static DEFAULT_CONTEXT = DEFAULT_CONTEXT;
 
   async startDevice(caps = {}) {
     this.args = _.clone(caps);
@@ -53,12 +61,25 @@ class Playwright extends DriverBase {
       });
     }
 
-    this.browserContext = await this.browser.newContext(newContextOptions);
-    this.page = await this.browserContext.newPage();
+    this.newContextOptions = newContextOptions;
+    await this._createContext();
 
     if (this.args.redirectConsole) {
       await initRedirectConsole(this);
     }
+  }
+
+  async _createContext(name = DEFAULT_CONTEXT, contextOptions = {}) {
+    const index = this.browserContexts.length;
+    const newContextOptions = Object.assign({}, contextOptions, this.newContextOptions);
+    const browserContext = await this.browser.newContext(newContextOptions);
+    browserContext.name = name;
+    browserContext.index = index;
+    this.browserContexts.push(browserContext);
+    this.browserContext = this.browserContexts[index];
+    this.pages.push(await this.browserContext.newPage());
+    this.page = this.pages[index];
+    return index;
   }
 
   async stopDevice() {
