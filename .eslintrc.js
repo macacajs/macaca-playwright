@@ -12,6 +12,7 @@ module.exports = {
     'jsdoc/require-param': 0,
     'jsdoc/check-param-names': 0,
     'jsdoc/require-param-description': 0,
+    'jsdoc/require-returns-description': 0,
     'arrow-parens': 0,
     'prefer-promise-reject-errors': 0,
     'no-control-regex': 0,
