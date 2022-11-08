@@ -54,7 +54,7 @@ describe('unit testing', function() {
     });
 
     it('element screenshot', async () => {
-      await driver.page.setContent(`<div><button id="input">Click me</button></div>`);
+      await driver.page.setContent('<div><button id="input">Click me</button></div>');
       await driver.findElement('XPath', '//*[@id="input"]');
       const base64 = await driver.takeElementScreenshot();
       assert(base64.match(/^[0-9a-z\/+=]+$/i));
