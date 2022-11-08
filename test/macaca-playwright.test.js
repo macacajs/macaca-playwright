@@ -287,8 +287,14 @@ describe('unit testing', function() {
       await driver.setWindowSize(null, 600, 600);
     });
 
-    it('screenshot', async () => {
+    it('page screenshot', async () => {
       const base64 = await driver.getScreenshot();
+      assert(base64.match(/^[0-9a-z\/+=]+$/i));
+    });
+
+    it('element screenshot', async () => {
+      const ele = await driver.findElement('id', 'input');
+      const base64 = await driver.takeElementScreenshot(ele.ELEMENT);
       assert(base64.match(/^[0-9a-z\/+=]+$/i));
     });
 

@@ -6,7 +6,7 @@ import DriverBase from 'driver-base';
 import _ from './helper';
 import initRedirectConsole from './redirect-console';
 import controllers from './controllers';
-import extraActions from './extra-actions';
+import extraActions from './next-actions';
 
 const DEFAULT_CONTEXT = 'DEFAULT_CONTEXT';
 
