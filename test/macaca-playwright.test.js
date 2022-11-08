@@ -53,6 +53,13 @@ describe('unit testing', function() {
       assert(base64.match(/^[0-9a-z\/+=]+$/i));
     });
 
+    it('element screenshot', async () => {
+      await driver.page.setContent('<div><button id="input">Click me</button></div>');
+      await driver.findElement('XPath', '//*[@id="input"]');
+      const base64 = await driver.takeElementScreenshot();
+      assert(base64.match(/^[0-9a-z\/+=]+$/i));
+    });
+
     it('set input value', async () => {
       const input = await driver.findElement('id', 'input');
       await driver.setValue(input.ELEMENT, 'aaa');
@@ -287,14 +294,8 @@ describe('unit testing', function() {
       await driver.setWindowSize(null, 600, 600);
     });
 
-    it('page screenshot', async () => {
+    it('screenshot', async () => {
       const base64 = await driver.getScreenshot();
-      assert(base64.match(/^[0-9a-z\/+=]+$/i));
-    });
-
-    it('element screenshot', async () => {
-      const ele = await driver.findElement('id', 'input');
-      const base64 = await driver.takeElementScreenshot(ele.ELEMENT);
       assert(base64.match(/^[0-9a-z\/+=]+$/i));
     });
 
