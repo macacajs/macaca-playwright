@@ -27,6 +27,7 @@ class Playwright extends DriverBase {
   locator = null; // 当前选中的 element
   atoms = [];
   pages = [];
+  elements = {};
   browserContexts = [];
   currentContextIndex = 0;
 
