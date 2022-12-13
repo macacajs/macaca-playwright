@@ -53,14 +53,14 @@ describe('test/macaca-playwright.test.js', function() {
 
     it('screenshot', async () => {
       res = await driver.getScreenshot();
-      assert(res.match(/^[0-9a-z\/+=]+$/i));
+      assert(res);
     });
 
     it('element screenshot', async () => {
       await driver.page.setContent('<div><button id="input">Click me</button></div>');
       await driver.findElement('xpath', '//*[@id="input"]');
       res = await driver.takeElementScreenshot();
-      assert(res.match(/^[0-9a-z\/+=]+$/i));
+      assert(res);
     });
 
     it('setValue and clearText', async () => {
