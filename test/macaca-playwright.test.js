@@ -76,6 +76,15 @@ describe('unit testing', function() {
       assert.equal(res, true);
     });
 
+    it('getRect', async () => {
+      const button = await driver.findElement('id', 'input');
+      res = await driver.getRect(button.ELEMENT);
+      assert(res.x);
+      assert(res.y);
+      assert(res.width);
+      assert(res.height);
+    });
+
     it('redirect location', async () => {
       const link = await driver.findElement('id', 'link-1');
       await driver.click(link.ELEMENT);
