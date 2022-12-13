@@ -6,7 +6,7 @@ const Playwright = require('../lib/macaca-playwright');
 
 const headless = !!process.env.CI;
 
-describe('unit testing', function() {
+describe('test/macaca-playwright.test.js', function() {
   let res;
   this.timeout(5 * 60E3);
   const customUserAgent = 'custom userAgent';
@@ -58,7 +58,7 @@ describe('unit testing', function() {
 
     it('element screenshot', async () => {
       await driver.page.setContent('<div><button id="input">Click me</button></div>');
-      await driver.findElement('XPath', '//*[@id="input"]');
+      await driver.findElement('xpath', '//*[@id="input"]');
       res = await driver.takeElementScreenshot();
       assert(res.match(/^[0-9a-z\/+=]+$/i));
     });
