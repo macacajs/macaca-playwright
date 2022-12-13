@@ -85,6 +85,12 @@ describe('test/macaca-playwright.test.js', function() {
       assert(res.height);
     });
 
+    it('getComputedCss', async () => {
+      const button = await driver.findElement('id', 'button-1');
+      res = await driver.getComputedCss(button.ELEMENT, 'padding');
+      assert.equal(res, '5px 10px');
+    });
+
     it('redirect location', async () => {
       const link = await driver.findElement('id', 'link-1');
       await driver.click(link.ELEMENT);

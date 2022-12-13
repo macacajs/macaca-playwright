@@ -1,6 +1,9 @@
 module.exports = {
   root: true,
   extends: 'eslint-config-egg/typescript',
+  globals: {
+    window: true,
+  },
   rules: {
     'valid-jsdoc': 0,
     'no-script-url': 0,
