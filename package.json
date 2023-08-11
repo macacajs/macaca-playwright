@@ -1,6 +1,6 @@
 {
   "name": "macaca-playwright",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Macaca Playwright driver",
   "keywords": [
     "playwright",
@@ -41,7 +41,8 @@
   },
   "scripts": {
     "test": "nyc --reporter=lcov --reporter=text mocha --require ts-node/register",
-    "lint": "eslint --ext js,ts --fix lib test",
+    "lint": "eslint --ext js,ts lib test",
+    "lint:fix": "eslint --ext js,ts --fix lib test",
     "prepublishOnly": "npm run build",
     "build": "sh ./build.sh",
     "contributor": "git-contributor"
