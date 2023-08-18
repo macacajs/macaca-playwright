@@ -15,6 +15,7 @@ type TContextOptions = {
   locale: string,
   userAgent?: string,
   recordVideo?: string,
+  viewport?: object,
 };
 
 class Playwright extends DriverBase {
@@ -61,6 +62,13 @@ class Playwright extends DriverBase {
         dir,
         size: { width: 1280, height: 800 },
       });
+    }
+
+    if (this.args.width && this.args.height) {
+      newContextOptions.viewport = {
+        width: this.args.width,
+        height: this.args.height,
+      };
     }
 
     this.newContextOptions = newContextOptions;
