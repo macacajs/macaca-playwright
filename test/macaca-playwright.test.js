@@ -76,6 +76,16 @@ describe('test/macaca-playwright.test.js', function() {
       assert.equal(res, true);
     });
 
+    it('elementStatus', async () => {
+      const button = await driver.findElement('id', 'input');
+      res = await driver.elementStatus(button.ELEMENT);
+      assert(res.disabled === false);
+      assert(res.editable === true);
+      assert(res.enabled === true);
+      assert(res.hidden === false);
+      assert(res.visible === true);
+    });
+
     it('getRect', async () => {
       const button = await driver.findElement('id', 'input');
       res = await driver.getRect(button.ELEMENT);
