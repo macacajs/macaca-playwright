@@ -86,6 +86,11 @@ describe('test/macaca-playwright.test.js', function() {
       assert(res.visible === true);
     });
 
+    it('click', async () => {
+      const button = await driver.findElement('id', 'input');
+      await driver.click(button.ELEMENT, { delay: 300 });
+    });
+
     it('getRect', async () => {
       const button = await driver.findElement('id', 'input');
       res = await driver.getRect(button.ELEMENT);
