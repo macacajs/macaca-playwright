@@ -133,7 +133,7 @@ describe('test/macaca-playwright.test.js', function() {
     });
 
     it('getAllCookies', async () => {
-      await driver.get('https://www.baidu.com');
+      await driver.get('https://www.google.com.hk');
       res = await driver.getAllCookies();
       assert(Array.isArray(res));
     });
