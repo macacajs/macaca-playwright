@@ -25,12 +25,12 @@ class Playwright extends DriverBase {
   newContextOptions = {};
   frame = null;
   page = null;
+  popup = null;
   locator = null; // 当前选中的 element
   atoms = [];
   pages = [];
   elements = {};
   browserContexts = [];
-  currentContextIndex = 0;
 
   static DEFAULT_CONTEXT = DEFAULT_CONTEXT;
 
@@ -89,7 +89,19 @@ class Playwright extends DriverBase {
     this.browserContext = this.browserContexts[index];
     this.pages.push(await this.browserContext.newPage());
     this.page = this.pages[index];
+    // Get all popups when they open
+    this.page.on('popup', async (popup) => {
+      // 提前置空，防止取到缓存
+      this.popup = null;
+      await popup.waitForLoadState();
+      this.popup = popup;
+    });
     return index;
+  }
+
+  _setContext(index: number) {
+    this.browserContext = this.browserContexts[index];
+    this.page = this.pages[index];
   }
 
   async stopDevice() {
