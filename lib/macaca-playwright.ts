@@ -91,8 +91,6 @@ class Playwright extends DriverBase {
     this.page = this.pages[index];
     // Get all popups when they open
     this.page.on('popup', async (popup) => {
-      this.pagePopup = null;
-      await popup.waitForLoadState();
       this.pagePopup = popup;
     });
     return index;
