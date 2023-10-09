@@ -25,7 +25,7 @@ class Playwright extends DriverBase {
   newContextOptions = {};
   frame = null;
   page = null;
-  popup = null;
+  pagePopup = null;
   locator = null; // 当前选中的 element
   atoms = [];
   pages = [];
@@ -91,10 +91,9 @@ class Playwright extends DriverBase {
     this.page = this.pages[index];
     // Get all popups when they open
     this.page.on('popup', async (popup) => {
-      // 提前置空，防止取到缓存
-      this.popup = null;
+      this.pagePopup = null;
       await popup.waitForLoadState();
-      this.popup = popup;
+      this.pagePopup = popup;
     });
     return index;
   }
