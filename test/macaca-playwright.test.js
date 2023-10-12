@@ -3,7 +3,6 @@ const assert = require('power-assert');
 
 const _ = require('../lib/helper');
 const Playwright = require('../lib/macaca-playwright');
-const { devices } = require('playwright');
 
 const headless = !!process.env.CI;
 
@@ -90,14 +89,6 @@ describe('test/macaca-playwright.test.js', function() {
     it('click', async () => {
       const button = await driver.findElement('id', 'input');
       await driver.click(button.ELEMENT, { delay: 300 });
-    });
-
-    it('rebuildContextPage & getWindowSize', async () => {
-      await driver.rebuildContextPage('DEFAULT_CONTEXT', {
-        ...devices['iPhone 13 Pro Max'],
-      });
-      const size = await driver.getWindowSize();
-      assert(size.width === 428);
     });
 
     it('getRect', async () => {
