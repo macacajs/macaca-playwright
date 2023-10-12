@@ -37,14 +37,13 @@ class Playwright extends DriverBase {
   async startDevice(caps = {}) {
     this.args = _.clone(caps);
 
-    const defaultLaunchOptions = {
+    const launchOptions = {
       headless: true,
+      ...this.args,
     };
 
-    const launchOptions = Object.assign(defaultLaunchOptions, this.args);
-
     delete launchOptions.port;
-    const browserName = this.args.browserName || 'chromium';
+    const browserName = launchOptions.browserName || 'chromium';
     this.browser = await playwright[browserName].launch(launchOptions);
     const newContextOptions: TContextOptions = {
       locale: this.args.locale,
