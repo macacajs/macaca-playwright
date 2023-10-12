@@ -45,7 +45,7 @@ class Playwright extends DriverBase {
     delete launchOptions.port;
     const browserName = launchOptions.browserName || 'chromium';
     this.browserType = await playwright[browserName];
-    this.browser = this.browserType.launch(launchOptions);
+    this.browser = await this.browserType.launch(launchOptions);
     const newContextOptions: TContextOptions = {
       locale: this.args.locale,
       ignoreHTTPSErrors: true,
