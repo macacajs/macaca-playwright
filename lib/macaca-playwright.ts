@@ -20,6 +20,7 @@ type TContextOptions = {
 
 class Playwright extends DriverBase {
   args = null;
+  browserType = null;
   browser = null;
   browserContext = null;
   newContextOptions = {};
@@ -41,10 +42,10 @@ class Playwright extends DriverBase {
       headless: true,
       ...this.args,
     };
-
     delete launchOptions.port;
     const browserName = launchOptions.browserName || 'chromium';
-    this.browser = await playwright[browserName].launch(launchOptions);
+    this.browserType = await playwright[browserName];
+    this.browser = this.browserType.launch(launchOptions);
     const newContextOptions: TContextOptions = {
       locale: this.args.locale,
       ignoreHTTPSErrors: true,
