@@ -16,6 +16,7 @@ type TContextOptions = {
   userAgent?: string,
   recordVideo?: object,
   viewport?: object,
+  permissions?: string[],
 };
 
 class Playwright extends DriverBase {
@@ -49,6 +50,10 @@ class Playwright extends DriverBase {
     const newContextOptions: TContextOptions = {
       locale: this.args.locale,
       ignoreHTTPSErrors: true,
+      permissions: [
+        'clipboard-read',
+        'clipboard-write',
+      ],
     };
 
     if (this.args.userAgent) {
