@@ -68,7 +68,11 @@ class Playwright extends DriverBase {
       ...this.args,
     };
     delete launchOptions.port;
-    if (launchOptions.browserName === 'chromium' && os.platform() === 'win32') {
+    if (
+      this.args.proxy
+      && launchOptions.browserName === 'chromium'
+      && os.platform() === 'win32'
+    ) {
       // Browser proxy option is required for Chromium on Windows.
       launchOptions.proxy = { server: 'per-context' };
     }
