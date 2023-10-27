@@ -7,6 +7,7 @@ import _ from './helper';
 import initRedirectConsole from './redirect-console';
 import controllers from './controllers';
 import extraActions from './next-actions';
+import os from 'os';
 
 const DEFAULT_CONTEXT = 'DEFAULT_CONTEXT';
 
@@ -17,10 +18,32 @@ type TContextOptions = {
   recordVideo?: object,
   viewport?: object,
   permissions?: string[],
+  proxy?: {
+    server: string;
+    username?: string;
+    password?: string;
+  };
+};
+
+type TDeviceCaps = {
+  port?: number;
+  locale?: string;
+  userAgent?: string;
+  recordVideo?: {
+    dir: string;
+  };
+  width?: number;
+  height?: number;
+  redirectConsole?: boolean;
+  proxy?: {
+    server: string;
+    username?: string;
+    password?: string;
+  };
 };
 
 class Playwright extends DriverBase {
-  args = null;
+  args: TDeviceCaps = null;
   browserType = null;
   browser = null;
   browserContext = null;
@@ -36,16 +59,20 @@ class Playwright extends DriverBase {
 
   static DEFAULT_CONTEXT = DEFAULT_CONTEXT;
 
-  async startDevice(caps = {}) {
+  async startDevice(caps: TDeviceCaps = {}) {
     this.args = _.clone(caps);
 
     const launchOptions = {
       headless: true,
+      browserName: 'chromium',
       ...this.args,
     };
     delete launchOptions.port;
-    const browserName = launchOptions.browserName || 'chromium';
-    this.browserType = await playwright[browserName];
+    if (launchOptions.browserName === 'chromium' && os.platform() === 'win32') {
+      // Browser proxy option is required for Chromium on Windows.
+      launchOptions.proxy = { server: 'per-context' };
+    }
+    this.browserType = await playwright[launchOptions.browserName];
     this.browser = await this.browserType.launch(launchOptions);
     const newContextOptions: TContextOptions = {
       locale: this.args.locale,
@@ -55,6 +82,10 @@ class Playwright extends DriverBase {
         'clipboard-write',
       ],
     };
+
+    if (this.args.proxy) {
+      newContextOptions.proxy = this.args.proxy;
+    }
 
     if (this.args.userAgent) {
       newContextOptions.userAgent = this.args.userAgent;
