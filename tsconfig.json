@@ -12,10 +12,11 @@
     "noUnusedLocals": true,
     "stripInternal": true,
     "pretty": true,
+    "allowJs": true,
     "declaration": true,
     "removeComments": false,
     "types": [ "node" ],
-    "outDir": "./dist/lib"
+    "outDir": "./dist"
   },
   "include": [
     "lib"
