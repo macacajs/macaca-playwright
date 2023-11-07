@@ -1,6 +1,6 @@
 import path from 'path';
 import { sync as mkdirp } from 'mkdirp';
-import playwright from 'playwright';
+import playwright, { Frame } from 'playwright';
 import DriverBase from 'driver-base';
 
 import _ from './helper';
@@ -48,9 +48,10 @@ class Playwright extends DriverBase {
   browser = null;
   browserContext = null;
   newContextOptions = {};
-  frame = null;
+  pageIframes: Frame[] = [];
   page = null;
   pagePopup = null;
+  pageIframe: Frame = null;
   locator = null; // 当前选中的 element
   atoms = [];
   pages = [];
@@ -162,14 +163,32 @@ class Playwright extends DriverBase {
       contextName = DEFAULT_CONTEXT;
     }
     const index = this.browserContexts.findIndex(it => it.name === contextName);
-    this.browserContext = this.browserContexts[index];
-    this.page = this.pages[index];
+    this._setContext(index);
     return index;
   }
 
   _setContext(index: number) {
     this.browserContext = this.browserContexts[index];
     this.page = this.pages[index];
+  }
+
+  /**
+   * 设置当前的page的Iframes
+   */
+  _freshPageIframes() {
+    this.pageIframes = this.page.mainFrame().childFrames();
+  }
+
+  /**
+   * 设置当前操作的iframe
+   */
+  _setPageIframeByIndex(index = 0) {
+    this._freshPageIframes();
+    if (!this.pageIframes[index]) {
+      console.error('target iframe not found');
+      return;
+    }
+    this.pageIframe = this.pageIframes[index];
   }
 
   async stopDevice() {

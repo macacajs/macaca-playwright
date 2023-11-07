@@ -1,15 +1,15 @@
 {
   "name": "macaca-playwright",
-  "version": "1.11.14",
+  "version": "1.11.15",
   "description": "Macaca Playwright driver",
   "keywords": [
     "playwright",
     "macaca"
   ],
   "files": [
-    "dist/**/*.js"
+    "dist"
   ],
-  "main": "./dist/lib/macaca-playwright.js",
+  "main": "./dist/macaca-playwright",
   "repository": {
     "type": "git",
     "url": "https://github.com/macacajs/macaca-playwright"
