@@ -1,6 +1,6 @@
 import path from 'path';
 import { sync as mkdirp } from 'mkdirp';
-import playwright, { Frame } from 'playwright';
+import playwright, { ElementHandle, Frame, FrameLocator, Locator } from 'playwright';
 import DriverBase from 'driver-base';
 
 import _ from './helper';
@@ -52,7 +52,7 @@ class Playwright extends DriverBase {
   page = null;
   pagePopup = null;
   pageIframe: Frame = null;
-  locator = null; // 当前选中的 element
+  locator: ElementHandle | Locator | FrameLocator = null; // 当前选中的 element 或 locator
   atoms = [];
   pages = [];
   elements = {};
