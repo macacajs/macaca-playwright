@@ -79,13 +79,14 @@ class Playwright extends DriverBase {
     }
     this.browserType = await playwright[launchOptions.browserName];
     this.browser = await this.browserType.launch(launchOptions);
+    const permissions = launchOptions.browserName === 'chromium' ? [
+      'clipboard-read',
+      'clipboard-write',
+    ] : [];
     const newContextOptions: TContextOptions = {
       locale: this.args.locale,
       ignoreHTTPSErrors: true,
-      permissions: [
-        'clipboard-read',
-        'clipboard-write',
-      ],
+      permissions,
     };
 
     if (this.args.proxy) {
