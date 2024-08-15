@@ -40,6 +40,7 @@ type TDeviceCaps = {
     username?: string;
     password?: string;
   };
+  navigationTimeout?: number;
 };
 
 class Playwright extends DriverBase {
@@ -144,6 +145,9 @@ class Playwright extends DriverBase {
     const browserContext = await this.browser.newContext(newContextOptions);
     browserContext.name = contextName;
     browserContext.index = index;
+    if (typeof this.args.navigationTimeout === 'number') {
+      browserContext.setDefaultNavigationTimeout(this.args.navigationTimeout);
+    }
     this.browserContexts.push(browserContext);
     this.browserContext = this.browserContexts[index];
     this.pages.push(await this.browserContext.newPage());
