@@ -1,6 +1,6 @@
 {
   "name": "macaca-playwright",
-  "version": "1.11.20",
+  "version": "1.12.0",
   "description": "Macaca Playwright driver",
   "keywords": [
     "playwright",
